@@ -13,7 +13,7 @@ func getJSONNodeFromString(data string) (node jsonNode, err error) {
 			return
 		}
 
-		if len(node) > 0 {
+		if len(anArr) > 0 {
 			node = anArr[0]
 		} else {
 			err = errors.New("Empty arrays are not suitable for comparison")
