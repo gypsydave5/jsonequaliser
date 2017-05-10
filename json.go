@@ -1,6 +1,7 @@
 package jsonequaliser
 
 import "encoding/json"
+import "errors"
 
 func getJSONNodeFromString(data string) (node jsonNode, err error) {
 	node = make(map[string]interface{})
@@ -11,7 +12,13 @@ func getJSONNodeFromString(data string) (node jsonNode, err error) {
 		if err = json.Unmarshal([]byte(data), &anArr); err != nil {
 			return
 		}
-		node = anArr[0]
+
+		if len(node) > 0 {
+			node = anArr[0]
+		} else {
+			err = errors.New("Empty arrays are not suitable for comparison")
+		}
+
 	}
 	return
 }
